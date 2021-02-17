@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import FilePickers from "./FilePickers";
+import AudioRecorder from "./AudioRecorder";
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
       <Text>Open up App.tsx to start working on your app!</Text>
       <FilePickers.pickAudioButton />
       <FilePickers.pickTextButton />
+      <AudioRecorder />
     </View>
   );
 }
