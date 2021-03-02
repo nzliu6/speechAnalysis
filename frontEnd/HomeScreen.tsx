@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Container, Header, Content, Button, Text } from 'native-base';
+import { Container, Header, Content, Button, Text, Footer, FooterTab } from 'native-base';
 import { Image, Alert } from 'react-native';
 import FilePickers from "./FilePickers";
 import AudioRecorder from "./AudioRecorder";
@@ -47,7 +47,7 @@ export default class HomeScreen extends React.Component<HomeProps, HomeState> {
               Enunciate does not keep your audio recordings. 
             </Text>
   
-            <Button success style={this.styles.introButton}>
+            <Button success style={this.styles.introButton} onPress={() => this.setState({ firstDisplay: true })}>
               <Text> Get Started </Text>
             </Button>
               {/* <FilePickers.pickAudioButton />
@@ -58,11 +58,23 @@ export default class HomeScreen extends React.Component<HomeProps, HomeState> {
         </View>
       );
     }
-
     if (this.state.firstDisplay){      
       return (
         <View style={this.styles.mainContainer}>
-          <Text> yeah! </Text>
+          <Container>
+            <Header />
+            <Content />
+            <Footer>
+              <FooterTab>
+                <Button active>
+                  <Text>Record</Text>
+                </Button>
+                <Button>
+                  <Text>Progress</Text>
+                </Button>
+              </FooterTab>
+            </Footer>
+          </Container>
         </View>
       )
     }
