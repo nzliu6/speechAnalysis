@@ -1,6 +1,5 @@
 # Mobile Computing Project
-## Team SecondCity
-
+## Team SecondCity - Project Enunciate
 <img src="./preview.png">
 
 ### To-Do
