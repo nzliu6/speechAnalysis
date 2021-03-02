@@ -1,6 +1,8 @@
 # Mobile Computing Project
 ## Team SecondCity
 
+<img src="./preview.png">
+
 ### To-Do
 - Get screen recording showing (Nick)
 - Finish navigation (Jiaqi)
