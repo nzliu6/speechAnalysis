@@ -1,5 +1,6 @@
 # Mobile Computing Project
-## Team SecondCity
+## Team SecondCity - Project Enunciate
+<img src="./preview.png">
 
 ### To-Do
 - Get screen recording showing (Nick)
