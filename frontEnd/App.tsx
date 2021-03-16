@@ -5,6 +5,7 @@ import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./HomeScreen";
 
+
 interface AppProps {}
 
 interface AppState {
