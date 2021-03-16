@@ -33,12 +33,11 @@ export default class RecordingScreen extends React.Component<Props, State> {
       this.getDuration();
     }
   }
-  getTranscription = async () => {
+  getTranscription = async (uri) => {
     // set isFetching to true, so the UI knows about it
     this.setState({ isFetching: true });
     try {
       // take the uri of the recorded audio from the file system
-      const uri = String(this.state.recordingObject.getURI());
       // now we create formData which will be sent to our backend
       const formData = new FormData();
       formData.append(
@@ -105,7 +104,7 @@ export default class RecordingScreen extends React.Component<Props, State> {
     const uri = this.state.recordingObject.getURI();
     this.setState({ recordingObject: undefined });
     console.log("Recording stopped and stored at", uri);
-    this.getTranscription();
+    this.getTranscription(uri);
   };
 
   getDuration = async () => {
