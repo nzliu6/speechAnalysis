@@ -2,6 +2,7 @@ import * as React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Button, Col, Grid, Icon, Row } from "native-base";
 import { Audio } from "expo-av";
+import axios from "axios";
 
 interface Props {}
 
@@ -10,6 +11,8 @@ interface State {
   paused: Boolean;
   duration: number;
   recordingObject: any;
+  isFetching: Boolean;
+  transcript: String;
 }
 
 export default class RecordingScreen extends React.Component<Props, State> {
@@ -20,6 +23,8 @@ export default class RecordingScreen extends React.Component<Props, State> {
       paused: false,
       duration: 0,
       recordingObject: undefined,
+      isFetching: false,
+      transcript: "",
     };
   }
 
@@ -28,6 +33,44 @@ export default class RecordingScreen extends React.Component<Props, State> {
       this.getDuration();
     }
   }
+  getTranscription = async () => {
+    // set isFetching to true, so the UI knows about it
+    this.setState({ isFetching: true });
+    try {
+      // take the uri of the recorded audio from the file system
+      const uri = String(this.state.recordingObject.getURI());
+      // now we create formData which will be sent to our backend
+      const formData = new FormData();
+      formData.append(
+        "file",
+        JSON.stringify({
+          uri: uri,
+          // as different audio types are used for android and ios - we should handle it
+          type: "audio/x-wav",
+          name: `${Date.now()}.wav`,
+        })
+      );
+      // post the formData to our backend
+      const { data } = await axios.post(
+        "http://localhost:3005/speech",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(data.transcript);
+      // set transcript from the data which we received from the api
+      this.setState({ transcript: data.transcript });
+    } catch (error) {
+      console.log("There was an error reading file", error);
+      this.stopRecording();
+      // we will take a closer look at resetRecording function further down
+    }
+    // set isFetching to false so the UI can properly react on that
+    this.setState({ isFetching: false });
+  };
 
   startRecording = async () => {
     try {
@@ -42,6 +85,7 @@ export default class RecordingScreen extends React.Component<Props, State> {
       await recording.prepareToRecordAsync(
         Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
       );
+
       await recording.startAsync();
       this.setState({ recordingObject: recording });
       console.log("Recording started");
@@ -61,6 +105,7 @@ export default class RecordingScreen extends React.Component<Props, State> {
     const uri = this.state.recordingObject.getURI();
     this.setState({ recordingObject: undefined });
     console.log("Recording stopped and stored at", uri);
+    this.getTranscription();
   };
 
   getDuration = async () => {
