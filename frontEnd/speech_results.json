@@ -2,12 +2,13 @@
   "document_tone": {
     "tones": [
       {
-        "score": 0.626154,
-        "tone_id": "joy",
-        "tone_name": "Joy"
+        "score": 0.822231,
+        "tone_id": "tentative",
+        "tone_name": "Tentative"
       }
     ]
   },
-  "transcript": "this is a new test the %HESITATION as Asian records ",
-  "date": "Wed, 17 Mar 2021 06:40:15 GMT"
+  "transcript": "today %HESITATION on this January the J. my whole soul is in this bringing America together %HESITATION %HESITATION uniting our people ",
+  "date": "Wed, 17 Mar 2021 08:06:10 GMT",
+  "confidence": 0.7
 }

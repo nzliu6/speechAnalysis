@@ -51,6 +51,8 @@ speechToText.recognize(recognizeParams)
     });
     
     transcription = speechRecognitionResults.result.results[0]['alternatives'][0]['transcript'];
+    confidence = speechRecognitionResults.result.results[0]['alternatives'][0]['confidence'];
+
     date = speechRecognitionResults.headers.date;
 
     const text = transcription.replace("%HESITATION", "");
@@ -63,6 +65,7 @@ speechToText.recognize(recognizeParams)
         .then(toneAnalysis => {
           toneAnalysis["transcript"] = transcription;
           toneAnalysis["date"] = date;
+          toneAnalysis["confidence"] = confidence;
           writeFile = JSON.stringify(toneAnalysis, null, 2);
           fs.writeFile('speech_results.json', writeFile, function (err) {
             if (err) throw err;
