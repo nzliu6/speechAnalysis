@@ -19,7 +19,10 @@ const init = async () => {
     path: "/speech",
     config: {
       handler: async (request, h) => {
+        print("ok")
         const data = request.payload;
+        print(data);
+        console.log(data);
         if (data.file) {
           const name = data.file.hapi.filename;
           const path = __dirname + "/uploads/" + name;
@@ -38,7 +41,7 @@ const init = async () => {
               };
 
               ffmpeg()
-                .input(path)
+                .input('./speech.wav')
                 .outputOptions([
                   "-f s16le",
                   "-acodec pcm_s16le",
@@ -49,6 +52,8 @@ const init = async () => {
                 ])
                 .save(encodedPath)
                 .on("end", async () => {
+                  console.log("printing encoded path")
+                  console.log(encodedPath)
                   const savedFile = fs.readFileSync(encodedPath);
 
                   const audioBytes = savedFile.toString("base64");
@@ -67,6 +72,8 @@ const init = async () => {
                     audio: audio,
                     config: sttConfig,
                   };
+
+                  console.log("converting file");
 
                   const [response] = await client.recognize(request);
                   const transcription = response.results
