@@ -43,6 +43,7 @@ const ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
 speechToText.recognize(recognizeParams)
   .then(speechRecognitionResults => {
     
+    console.log(JSON.stringify(speechRecognitionResults, null, 2));
 
     const tone_analyzer = new ToneAnalyzerV3({
       iam_apikey: '3mIz0ZMWMC-ucwBzGEqJV8BqW2teoQpWP9TY5ullsM4H',
@@ -50,7 +51,12 @@ speechToText.recognize(recognizeParams)
       url: 'https://gateway.watsonplatform.net/tone-analyzer/api'
     });
     
-    transcription = speechRecognitionResults.result.results[0]['alternatives'][0]['transcript'];
+    transcription = "";
+    trans = speechRecognitionResults.result.results;
+    for (var i=0; i<trans.length; i++){
+      transcription += trans[i]['alternatives'][0]['transcript'];
+    }
+    console.log(transcription);
     confidence = speechRecognitionResults.result.results[0]['alternatives'][0]['confidence'];
 
     date = speechRecognitionResults.headers.date;
@@ -63,6 +69,8 @@ speechToText.recognize(recognizeParams)
 
     tone_analyzer.tone(toneParams)
         .then(toneAnalysis => {
+          console.log(JSON.stringify(toneAnalysis, null, 2));
+
           toneAnalysis["transcript"] = transcription;
           toneAnalysis["date"] = date;
           toneAnalysis["confidence"] = confidence;

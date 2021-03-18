@@ -2,13 +2,13 @@
   "document_tone": {
     "tones": [
       {
-        "score": 0.822231,
-        "tone_id": "tentative",
-        "tone_name": "Tentative"
+        "score": 0.637881,
+        "tone_id": "anger",
+        "tone_name": "Anger"
       }
     ]
   },
-  "transcript": "today %HESITATION on this January the J. my whole soul is in this bringing America together %HESITATION %HESITATION uniting our people ",
-  "date": "Wed, 17 Mar 2021 08:06:10 GMT",
-  "confidence": 0.7
+  "transcript": "I ask every American to join me in this are you trying to place the call on those who face anger resentment hatred extremism lawlessness violence please ",
+  "date": "Wed, 17 Mar 2021 17:07:54 GMT",
+  "confidence": 0.77
 }

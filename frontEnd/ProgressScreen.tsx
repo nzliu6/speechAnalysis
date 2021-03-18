@@ -11,7 +11,7 @@ interface State {
 }
 
 const customData = require('./speech_results.json');
-const data = {'analytical':0, 'confident':0, 'tentative': 0};
+const data = {'analytical':0, 'confident':0, 'tentative': 0, 'joy': 0, 'sad': 0, 'anger': 0};
 
 export default class ProgressScreen extends React.Component<Props, State> {
   constructor(props: any) {
@@ -27,7 +27,7 @@ export default class ProgressScreen extends React.Component<Props, State> {
   readFiles(){
     var tones = customData["document_tone"]["tones"]
     for(var i=0; i<tones.length; i++) {
-        data[tones[i]["tone_id"]] += 1;
+        data[tones[i]["tone_id"]] += data[tones[i]["score"]];
     }
   }
 
@@ -43,7 +43,7 @@ export default class ProgressScreen extends React.Component<Props, State> {
               Recorded Transcription
           </Text>
           <Text style={this.styles.texts}>
-              Confidence level: {customData["confidence"]}
+              Articulation: {customData["confidence"]}
           </Text>
           <Text style={this.styles.script}>
               "{ this.state.transcription }"
@@ -54,9 +54,21 @@ export default class ProgressScreen extends React.Component<Props, State> {
           <View style={this.styles.container}>
           <VictoryChart polar
             theme={VictoryTheme.material}
+            animate={{ duration: 1000 }}
             >
+                <VictoryBar
+                style={{ data: { fill: "tomato", width: 25 } }}
+                data={[
+                { x: "analytical", y: data["analytical"] },
+                { x: "confident", y: data["confident"] },
+                { x: "tentative", y: data["tentative"] },
+                { x: "joy", y: data["joy"] },
+                { x: "sad", y: data["sad"] },
+                { x: "anger", y: data["anger"] }
+                ]}
+            />
             {
-                ["analytical", "confident", "tentative"].map((d, i) => {
+                ["analytical", "confident", "tentative", "joy", "sad", "anger"].map((d, i) => {
                 return (
                     <VictoryPolarAxis dependentAxis
                     key={i}
@@ -67,14 +79,7 @@ export default class ProgressScreen extends React.Component<Props, State> {
                 );
                 })
             }
-            <VictoryBar
-                style={{ data: { fill: "tomato", width: 25 } }}
-                data={[
-                { x: "analytical", y: data["analytical"] },
-                { x: "confident", y: data["confident"] },
-                { x: "tentative", y: data["tentative"] },
-                ]}
-            />
+            
             </VictoryChart>
         </View>
       </View>
