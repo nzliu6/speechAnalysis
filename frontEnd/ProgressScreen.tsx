@@ -27,7 +27,8 @@ export default class ProgressScreen extends React.Component<Props, State> {
   readFiles(){
     var tones = customData["document_tone"]["tones"]
     for(var i=0; i<tones.length; i++) {
-        data[tones[i]["tone_id"]] += data[tones[i]["score"]];
+      console.log(tones[i]["score"]);
+        data[tones[i]["tone_id"]] += tones[i]["score"];
     }
   }
 
@@ -73,6 +74,7 @@ export default class ProgressScreen extends React.Component<Props, State> {
                     <VictoryPolarAxis dependentAxis
                     key={i}
                     label={d}
+                    domain={[0, 1]}
                     labelPlacement="perpendicular"
                     axisValue={d}
                     />

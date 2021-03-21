@@ -1,0 +1,19 @@
+{
+  "document_tone": {
+    "tones": [
+      {
+        "score": 0.612753,
+        "tone_id": "joy",
+        "tone_name": "Joy"
+      },
+      {
+        "score": 0.550576,
+        "tone_id": "analytical",
+        "tone_name": "Analytical"
+      }
+    ]
+  },
+  "transcript": "we look ahead we are uniquely American way restless bold optimistic and set our sights on the nation we know we can be and we must speak I think my predecessors of both parties for their presence here ",
+  "date": "Sun, 21 Mar 2021 19:12:23 GMT",
+  "confidence": 0.84
+}

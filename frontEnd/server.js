@@ -10,13 +10,8 @@ var jsonOutput;
 
 var resolve = require('path').resolve;
 
-
+// Please update the audioDir path with the location of your app's filesystem in the device you are using
 var audioDir = '../../../../../Library/Developer/CoreSimulator/Devices/131CAEDD-976F-48B3-9002-FEFFE629610A/data/Containers/Data/Application/CEC34220-3A4C-4364-85B7-2462C284A1B8/Documents/ExponentExperienceData/';
-var folders = fs.readdirSync(audioDir)[0]
-
-
-var absolute = 'file:///Users/Jiaqi/Library/Developer/CoreSimulator/Devices/131CAEDD-976F-48B3-9002-FEFFE629610A/data/Containers/Data/Application/CEC34220-3A4C-4364-85B7-2462C284A1B8/Library/Caches/ExponentExperienceData/%2540anonymous%252FfrontEnd-1b2aeec9-9d46-40fb-a993-ad55b2b22eb5/AV/recording-84B0A4D9-8E2B-4868-9A5F-B34E0F8C2CB2.caf'
-
 
 var audioType= 'audio/wav'
 
@@ -27,7 +22,6 @@ const speechToText = new SpeechToTextV1({
   serviceUrl: 'https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/f7e19bc0-3c10-4c59-9199-8122cb2533e1',
 });
 
-console.log(audioDir+'/%40anonymous%2FfrontEnd-1b2aeec9-9d46-40fb-a993-ad55b2b22eb5/'+'small.wav');
 const recognizeParams = {
   audio: fs.createReadStream(audioDir+'/%40anonymous%2FfrontEnd-1b2aeec9-9d46-40fb-a993-ad55b2b22eb5/'+'small.wav'),
   contentType: audioType,
@@ -42,9 +36,7 @@ const ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
 
 speechToText.recognize(recognizeParams)
   .then(speechRecognitionResults => {
-    
-    console.log(JSON.stringify(speechRecognitionResults, null, 2));
-
+  
     const tone_analyzer = new ToneAnalyzerV3({
       iam_apikey: '3mIz0ZMWMC-ucwBzGEqJV8BqW2teoQpWP9TY5ullsM4H',
       version: '2017-09-21',
@@ -56,7 +48,6 @@ speechToText.recognize(recognizeParams)
     for (var i=0; i<trans.length; i++){
       transcription += trans[i]['alternatives'][0]['transcript'];
     }
-    console.log(transcription);
     confidence = speechRecognitionResults.result.results[0]['alternatives'][0]['confidence'];
 
     date = speechRecognitionResults.headers.date;
@@ -69,8 +60,6 @@ speechToText.recognize(recognizeParams)
 
     tone_analyzer.tone(toneParams)
         .then(toneAnalysis => {
-          console.log(JSON.stringify(toneAnalysis, null, 2));
-
           toneAnalysis["transcript"] = transcription;
           toneAnalysis["date"] = date;
           toneAnalysis["confidence"] = confidence;
