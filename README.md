@@ -1,10 +1,8 @@
 # Mobile Computing Project
+
 ## Team SecondCity - Project Enunciate
+
 <img src="./preview.png">
 
-### To-Do
-- Get screen recording showing (Nick)
-- Finish navigation (Jiaqi)
-- Recording progress locally/Progress tab (Jiaqi)
-- Display data visually; graphically (Jiaqi & Nick)
-- Local server connection to run speech-to-text (Dawei)
+Our App is in the folder called "frontend". Please look in there for a detailed
+Readme on how to run it.
