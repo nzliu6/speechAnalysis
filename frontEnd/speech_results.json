@@ -1,0 +1,14 @@
+{
+  "document_tone": {
+    "tones": [
+      {
+        "score": 0.608439,
+        "tone_id": "anger",
+        "tone_name": "Anger"
+      }
+    ]
+  },
+  "transcript": "I ask every American to join me in this cause %HESITATION uniting to fight the common forms we face arm anger resentment hatred %HESITATION extremism lawlessness violence ",
+  "date": "Sun, 21 Mar 2021 19:30:02 GMT",
+  "confidence": 0.95
+}

@@ -21,4 +21,6 @@ target 'frontEnd' do
   # post_install do |installer|
   #    flipper_post_install(installer)
   # end
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
 end
